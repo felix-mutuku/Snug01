@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,9 +18,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
-
-import java.util.Calendar;
-import java.util.TimeZone;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -52,6 +48,10 @@ public class SplashActivity extends AppCompatActivity {
 
         Typeface face2 = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         versionText.setTypeface(face2);
+
+        String versionName = BuildConfig.VERSION_NAME;
+        String title = "App v" + versionName;
+        versionText.setText(title);
 
         MobileAds.initialize(this, getString(R.string.APP_UNIT_ID));
 

@@ -1,17 +1,15 @@
 package com.snugjar.truthordare;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -45,8 +43,9 @@ public class PlayCardsActivity extends AppCompatActivity {
         mContext = getApplicationContext();
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/JennaSue.ttf");
+        Typeface face2 = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         logo.setTypeface(face);
-        resetText.setTypeface(face);
+        resetText.setTypeface(face2);
 
         SharedPreferences sharedPreferences = getSharedPreferences("PositiveSwipe", Context.MODE_PRIVATE);
         info = sharedPreferences.getString("choice", "N/A");

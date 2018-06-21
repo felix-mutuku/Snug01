@@ -42,7 +42,6 @@
         android:layout_marginEnd="138dp"
         android:layout_marginStart="138dp"
         android:layout_marginTop="20dp"
-        android:background="@color/black"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16sp"
