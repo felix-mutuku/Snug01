@@ -2,6 +2,8 @@ package com.snugjar.truthordare;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -12,11 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class WelcomeActivity extends AppCompatActivity {
     ImageView logo, backgrnd;
     TextView disclaimer;
     Button buttonAgree;
+    AdView mAdView;
+    ConnectivityManager cManager;
+    NetworkInfo nInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +34,24 @@ public class WelcomeActivity extends AppCompatActivity {
         disclaimer = findViewById(R.id.disclaimer);
         buttonAgree = findViewById(R.id.buttonAgree);
         backgrnd = findViewById(R.id.backgrnd);
+        mAdView = findViewById(R.id.adView);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         disclaimer.setTypeface(face);
+
+        cManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert cManager != null;
+        nInfo = cManager.getActiveNetworkInfo();
+
+        if (nInfo != null && nInfo.isConnected()) {
+            //when connected to the internet, show ads
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        } else {
+            //user not connected to the internet, don't show ads
+            mAdView.setVisibility(View.GONE);
+        }
 
         Glide
                 .with(WelcomeActivity.this)
