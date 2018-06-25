@@ -56,6 +56,7 @@ public class PlayCardsActivity extends AppCompatActivity {
 
         if (nInfo != null && nInfo.isConnected()) {
             //when connected to the internet, show ads
+            mAdView.setVisibility(View.VISIBLE);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
         } else {
