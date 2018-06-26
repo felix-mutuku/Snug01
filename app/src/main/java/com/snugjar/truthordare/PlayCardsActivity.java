@@ -110,6 +110,12 @@ public class PlayCardsActivity extends AppCompatActivity {
                 }
 
                 break;
+            case "Dares":
+                for (Choices profile : Objects.requireNonNull(MainUtils.loadDares(this.getApplicationContext()))) {
+                    mSwipeView.addView(new MainPlayCard(mContext, profile, mSwipeView));
+                }
+
+                break;
             case "ThirtySix":
                 for (Choices profile : Objects.requireNonNull(MainUtils.loadThirtySix(this.getApplicationContext()))) {
                     mSwipeView.addView(new MainPlayCard(mContext, profile, mSwipeView));

@@ -1,15 +1,12 @@
 package com.snugjar.truthordare;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -103,6 +100,10 @@ public class MainCard {
 
                 break;
             case "Exes":
+                cardClick();
+
+                break;
+            case "Dares":
                 cardClick();
 
                 break;

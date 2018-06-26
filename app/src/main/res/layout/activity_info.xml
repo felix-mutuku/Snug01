@@ -66,6 +66,5 @@
             android:layout_gravity="bottom"
             ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/APP_UNIT_ID" />
-        <!--for testing banner ads = ca-app-pub-3940256099942544/6300978111-->
     </LinearLayout>
 </ScrollView>

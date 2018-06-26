@@ -112,6 +112,11 @@ public class InfoActivity extends AppCompatActivity {
                 SFileName = "Exes.txt";
                 readTxt();
                 break;
+            case "Dares":
+                //show more info about the Exes card
+                SFileName = "Dares.txt";
+                readTxt();
+                break;
             case "ThirtySix":
                 //show more info about the Thirty Six card
                 SFileName = "ThirtySix.txt";

@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class MainUtils {
 
@@ -141,6 +140,29 @@ public class MainUtils {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             JSONArray array = new JSONArray(loadJSONFromAsset(context, "exes.json"));
+            List<Choices> profileList = new ArrayList<>();
+
+            for (int i = 0; i < array.length(); i++) {
+                Choices profile = gson.fromJson(array.getString(i), Choices.class);
+
+                profileList.add(profile);
+            }
+
+            //to shuffle the cards
+            Collections.shuffle(profileList);
+
+            return profileList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<Choices> loadDares(Context context) {
+        try {
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            JSONArray array = new JSONArray(loadJSONFromAsset(context, "dares.json"));
             List<Choices> profileList = new ArrayList<>();
 
             for (int i = 0; i < array.length(); i++) {

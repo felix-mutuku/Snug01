@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,6 +35,10 @@ public class AboutActivity extends AppCompatActivity {
     private int revealX;
     private int revealY;
 
+    AdView mAdView;
+    ConnectivityManager cManager;
+    NetworkInfo nInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,7 @@ public class AboutActivity extends AppCompatActivity {
         logo = findViewById(R.id.logo);
         back = findViewById(R.id.back);
         about = findViewById(R.id.about);
+        mAdView = findViewById(R.id.adView);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         about.setTypeface(face);
@@ -51,6 +60,20 @@ public class AboutActivity extends AppCompatActivity {
                 .skipMemoryCache(true)
                 .crossFade()
                 .into(logo);
+
+        cManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert cManager != null;
+        nInfo = cManager.getActiveNetworkInfo();
+
+        if (nInfo != null && nInfo.isConnected()) {
+            //when connected to the internet, show ads
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        } else {
+            //user not connected to the internet, don't show ads
+            mAdView.setVisibility(View.GONE);
+        }
 
         readTxt();
 
