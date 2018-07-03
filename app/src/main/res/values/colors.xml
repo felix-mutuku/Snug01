@@ -7,4 +7,9 @@
     <color name="black">#000000</color>
     <color name="green">#00FF00</color>
     <color name="red">#FF0000</color>
+    <color name="rose_red">#cb0e40</color>
+    <color name="sky_blue">#87ceeb</color>
+    <color name="light_purple">#FF00FF</color>
+    <color name="anchor">#5d6268</color>
+    <color name="denim">#1560bd</color>
 </resources>

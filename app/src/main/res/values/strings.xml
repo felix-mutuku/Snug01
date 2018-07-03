@@ -6,6 +6,6 @@
     <string name="reset">Click to refresh Truth or Drink cards</string>
     <string name="finished_cards">You have made it to the end of these cards :)\n\nYou could always play some more cards.</string>
     <!--Sample AdMob app unit ID: ca-app-pub-3940256099942544~3347511713-->
-    <string name="APP_UNIT_ID">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="APP_UNIT_ID">ca-app-pub-5123885596101098/8742625182</string>
     <!--App unit id : ca-app-pub-5123885596101098/8742625182-->
 </resources>
