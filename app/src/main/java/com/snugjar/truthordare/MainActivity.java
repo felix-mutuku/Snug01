@@ -4,11 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +31,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView about, logo;
+    ImageView about, logo, share;
     TextView resetText;
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipeView = findViewById(R.id.swipeView);
         rootLayout = findViewById(R.id.root_layout);
         resetText = findViewById(R.id.resetText);
+        share = findViewById(R.id.share);
         mContext = getApplicationContext();
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -123,6 +126,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareApp();
+            }
+        });
+
         if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                 intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
                 intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
@@ -145,6 +155,37 @@ public class MainActivity extends AppCompatActivity {
             rootLayout.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    private void shareApp() {
+        try {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Truth or Drink ()");
+            String sAux = "\nThe Truth or Drink App you have been waiting for\n\nFor Couples, Exes, Siblings, Friends and Parents\n\n";
+            sAux = sAux + "http://play.google.com/store/apps/details?id=com.snugjar.truthordare \n";
+            i.putExtra(Intent.EXTRA_TEXT, sAux);
+            startActivity(Intent.createChooser(i, "choose one"));
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar.make(rootLayout, "Please Try again Later :(", Snackbar.LENGTH_LONG)
+                    .setAction("Retry", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            shareApp();
+                        }
+                    });
+
+            //Changing message text color
+            snackbar.setActionTextColor(Color.WHITE);
+            //Changing action button text color
+            View sbView = snackbar.getView();
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            sbView.setBackgroundColor(getResources().getColor(R.color.white));
+            //displaying the
+            snackbar.show();
+
+        }
     }
 
     @Override

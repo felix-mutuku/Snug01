@@ -6,8 +6,8 @@ android {
         applicationId "com.snugjar.truthordare"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 5
-        versionName "1.4"
+        versionCode 6
+        versionName "1.5"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.mindorks:placeholderview:0.7.2'
     implementation 'jp.wasabeef:glide-transformations:2.0.2'
     implementation 'com.android.support:support-v13:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     testImplementation 'junit:junit:4.12'
     //androidTestImplementation 'com.android.support.test:runner:1.0.2'
