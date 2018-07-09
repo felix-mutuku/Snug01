@@ -1,15 +1,19 @@
 package com.snugjar.truthordare;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -29,6 +33,7 @@ public class PlayCardsActivity extends AppCompatActivity {
     AdView mAdView;
     ConnectivityManager cManager;
     NetworkInfo nInfo;
+    ImageView share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,7 @@ public class PlayCardsActivity extends AppCompatActivity {
         rootLayout = findViewById(R.id.root_layout);
         resetText = findViewById(R.id.resetText);
         mAdView = findViewById(R.id.adView);
+        share = findViewById(R.id.share);
         mContext = getApplicationContext();
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/JennaSue.ttf");
@@ -155,5 +161,43 @@ public class PlayCardsActivity extends AppCompatActivity {
                 break;
         }
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareApp();
+            }
+        });
+
+    }
+
+    private void shareApp() {
+        try {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Truth or Drink ()");
+            String sAux = "\nThe Truth or Drink App you have been waiting for\n\nFor Couples, Exes, Siblings, Friends and Parents\n\n";
+            sAux = sAux + "http://play.google.com/store/apps/details?id=com.snugjar.truthordare\n";
+            i.putExtra(Intent.EXTRA_TEXT, sAux);
+            startActivity(Intent.createChooser(i, "choose one"));
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar.make(rootLayout, "Please Try again Later :(", Snackbar.LENGTH_LONG)
+                    .setAction("Retry", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            shareApp();
+                        }
+                    });
+
+            //Changing message text color
+            snackbar.setActionTextColor(Color.WHITE);
+            //Changing action button text color
+            View sbView = snackbar.getView();
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            sbView.setBackgroundColor(getResources().getColor(R.color.white));
+            //displaying the
+            snackbar.show();
+
+        }
     }
 }

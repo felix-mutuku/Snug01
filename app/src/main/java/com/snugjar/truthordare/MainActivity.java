@@ -133,11 +133,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*new AppRate(this)
+                .setMinLaunchesUntilPrompt(1)
+                .setShowIfAppHasCrashed(false)
+                .setOnClickListener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Do something.
+                        Toast.makeText(MainActivity.this, "Clicked Something", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .init();*/
+
         if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                 intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
                 intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
-            rootLayout.setVisibility(View.INVISIBLE);
 
+            rootLayout.setVisibility(View.INVISIBLE);
             revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
             revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
 
@@ -163,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             i.setType("text/plain");
             i.putExtra(Intent.EXTRA_SUBJECT, "Truth or Drink ()");
             String sAux = "\nThe Truth or Drink App you have been waiting for\n\nFor Couples, Exes, Siblings, Friends and Parents\n\n";
-            sAux = sAux + "http://play.google.com/store/apps/details?id=com.snugjar.truthordare \n";
+            sAux = sAux + "http://play.google.com/store/apps/details?id=com.snugjar.truthordare";
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             startActivity(Intent.createChooser(i, "choose one"));
         } catch (Exception e) {
