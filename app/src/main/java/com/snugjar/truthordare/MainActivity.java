@@ -2,12 +2,14 @@ package com.snugjar.truthordare;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -31,7 +33,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView about, logo, share;
+    ImageView about, logo, share, rate;
     TextView resetText;
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         rootLayout = findViewById(R.id.root_layout);
         resetText = findViewById(R.id.resetText);
         share = findViewById(R.id.share);
+        rate = findViewById(R.id.rate);
         mContext = getApplicationContext();
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -133,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rateApp();
+            }
+        });
+
         /*new AppRate(this)
                 .setMinLaunchesUntilPrompt(1)
                 .setShowIfAppHasCrashed(false)
@@ -197,6 +207,22 @@ public class MainActivity extends AppCompatActivity {
             //displaying the
             snackbar.show();
 
+        }
+    }
+
+    private void rateApp() {
+        Uri uri = Uri.parse("market://details?id=" + mContext.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + mContext
+                            .getPackageName())));
         }
     }
 
