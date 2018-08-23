@@ -9,6 +9,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
+        android:descendantFocusability="blocksDescendants"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -31,7 +32,6 @@
                 android:layout_height="56dp"
                 android:layout_centerInParent="true"
                 android:layout_margin="5dp"
-                android:background="@drawable/bg_button2"
                 android:padding="10dp" />
         </RelativeLayout>
 
